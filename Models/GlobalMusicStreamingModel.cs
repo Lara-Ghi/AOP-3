@@ -1,8 +1,8 @@
 using CsvHelper.Configuration.Attributes;
 
 class GlobalMusicStreamingModel {
-    [Name("User_Id")]
-    public int UserId { get; set; }
+    [Name("User_ID")]
+    public required string UserID { get; set; }
 
     [Name("Age")]
     public int Age { get; set; }
@@ -28,12 +28,12 @@ class GlobalMusicStreamingModel {
     [Name("Subscription Type")]
     public string? SubscriptionType { get; set; }
 
-    [Name("Listening Time")]
+    [Name("Listening Time (Morning/Afternoon/Night)")]
     public string? ListeningTime { get; set; }
 
-    [Name("Discover Weekly Engagement")]
+    [Name("Discover Weekly Engagement (%)")]
     public double DiscoverWeeklyEngagement { get; set; }
 
-    [Name("Repeat Song Rate")]
+    [Name("Repeat Song Rate (%)")]
     public double RepeatSongRate { get; set; }
 }
