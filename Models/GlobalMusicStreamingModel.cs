@@ -17,7 +17,7 @@ class GlobalMusicStreamingModel {
     public string? TopGenre { get; set; }
 
     [Name("Minutes Streamed Per Day")]
-    public string? MinutesStreamedPerDay { get; set; }
+    public int MinutesStreamedPerDay { get; set; }
 
     [Name("Number of Songs Liked")]
     public int NumberOfSongsLiked { get; set; }
