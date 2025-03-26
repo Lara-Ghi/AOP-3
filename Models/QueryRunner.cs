@@ -7,7 +7,7 @@ public class QueryRunner
     public (List<double> Counts, List<string> Names)   Run_Generic_Bar_Chart() 
     {
         DataLoader<GlobalMusicStreamingModel> musicLoader = new DataLoader<GlobalMusicStreamingModel>();
-        musicLoader.LoadData("CSV-Files/global_music_streaming.csv");
+        musicLoader.LoadData("CSV-Files/globalMusicStreaming.csv");
 
         var musicData = musicLoader.data;
 
