@@ -1,4 +1,5 @@
-<Window xmlns="https://github.com/avaloniaui"
+<Window CanResize="True"
+        xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:AOP_3.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,21 +9,28 @@
         x:Class="AOP_3.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="AOP_3">
+        Title="Global Music Streaming Data">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-        <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
 
-        <lvc:CartesianChart Series="{Binding Series}"
-                            YAxes="{Binding YAxes}">
+    <Grid ColumnDefinitions="400,400,400,400" RowDefinitions="70,320,320"  Margin="4">
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="Select a graph to start: " HorizontalAlignment="Center"/>
+                <ComboBox SelectedIndex="0" MaxDropDownHeight="100" Grid.Column="0" Grid.Row="0">
+                    <ComboBoxItem>Top Streaming Platforms</ComboBoxItem>
+                    <ComboBoxItem>Top Genres</ComboBoxItem>
+                    <ComboBoxItem>Country</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <lvc:CartesianChart Grid.Column="0" Grid.Row="1" Series="{Binding Series}"
+                                                         YAxes="{Binding YAxes}">
+        </lvc:CartesianChart>
+        <lvc:CartesianChart Grid.Column="1" Grid.Row="1" Series="{Binding GenreSeries}"
+                                                         YAxes="{Binding GenreYAxes}">
         </lvc:CartesianChart>
     </Grid>
-
 </Window>
