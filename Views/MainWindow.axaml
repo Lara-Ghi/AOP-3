@@ -17,7 +17,7 @@
 
 
 
-        <ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
                 <Grid
                         Margin="20"
                         ColumnDefinitions="Auto, 500, 500 500, 500"
@@ -49,8 +49,8 @@
                                 CornerRadius="10"
                                 Series="{Binding PlatformSeries}"
                                 YAxes="{Binding PlatformYAxes}" />
-
-                        <lvc:CartesianChart
+                        
+                        <lvc:PieChart
                                 Grid.Row="1"
                                 Grid.Column="2"
                                 Height="300"
@@ -58,8 +58,7 @@
                                 BorderBrush="WhiteSmoke"
                                 BorderThickness="2"
                                 CornerRadius="10"
-                                Series="{Binding GenreSeries}"
-                                YAxes="{Binding GenreYAxes}" />
+                                Series="{Binding GenreSeries}" />
 
                         <lvc:GeoMap
                                 Grid.Row="2"
@@ -71,6 +70,16 @@
                                 CornerRadius="10"
                                 MapProjection="Mercator"
                                 Series="{Binding CountrySeries}" />
+
+                        <lvc:PieChart
+                                Grid.Row="2"
+                                Grid.Column="2"
+                                Height="300"
+                                Margin="0,0,0,5"
+                                BorderBrush="WhiteSmoke"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                Series="{Binding SubscriptionSeries}" />
 
                 </Grid>
         </ScrollViewer>

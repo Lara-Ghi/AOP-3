@@ -12,6 +12,7 @@ namespace AOP_3.ViewModels.Charts;
 public class UsersByGenreChart
 {
     //TODO: implement title in UI
+    // Not implemented in the UI, since it was replaced by the pie chart.
     public LabelVisual Title { get; set; } =
     new()
     {
@@ -34,7 +35,7 @@ public class UsersByGenreChart
                                                     Genre = p.Key,
                                                     Count = p.Count()
                                                 })
-                                                .OrderByDescending(p => p.Count);
+                                                .OrderByDescending(p => p.Count).ToList();
 
         List<double> genrecounts = genre_counts.Select(p => (double)p.Count).ToList();
         List<string> genrenames = genre_counts.Select(p => p.Genre).ToList()!;
