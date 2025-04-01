@@ -11,16 +11,6 @@ using SkiaSharp;
 namespace AOP_3.ViewModels.Charts;
 public class UsersPerPlatformChart
 {
-    //TODO: implement title in UI
-    public LabelVisual Title { get; set; } =
-       new()
-       {
-           Text = "Users Per Platform",
-           TextSize = 25,
-           Padding = new LiveChartsCore.Drawing.Padding(15),
-           Paint = new SolidColorPaint(SKColors.WhiteSmoke)
-       };
-
     public (List<double> Counts, List<string> Names) Run_Platform_Bar_Chart()
     {
         DataLoader<GlobalMusicStreamingModel> musicLoader = new DataLoader<GlobalMusicStreamingModel>();
