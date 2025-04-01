@@ -7,102 +7,122 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:AOP_3.ViewModels"
         Title="Global Music Streaming Service"
-        d:DesignHeight="450"
-        d:DesignWidth="800"
+        d:DesignHeight="900"
+        d:DesignWidth="1200"
         x:DataType="vm:MainWindowViewModel"
         CanResize="True"
         Icon="/Assets/avalonia-logo.ico"
         mc:Ignorable="d">
 
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
+        <Grid
+                Margin="20"
+                ColumnDefinitions="Auto, 1*"
+                RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                ShowGridLines="True">
 
+            <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical">
+                <ComboBox MaxDropDownHeight="100" SelectedIndex="0">
+                    <ComboBoxItem>Top Streaming Platforms</ComboBoxItem>
+                    <ComboBoxItem>Top Genres</ComboBoxItem>
+                    <ComboBoxItem>Users By Country</ComboBoxItem>
+                    <ComboBoxItem>Subscription Types</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
 
+            <lvc:CartesianChart
+                    Title="{Binding ListeningTimeTitle}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Height="300"
+                    Margin="0,0,0,5"
+                    BorderBrush="WhiteSmoke"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Series="{Binding ListeningTimeSeries}"
+                    XAxes="{Binding ListeningTimeXAxes}"
+                    YAxes="{Binding ListeningTimeYAxes}" />
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
-                <Grid
-                        Margin="20"
-                        ColumnDefinitions="Auto, 500, 500"
-                        RowDefinitions="Auto, Auto, 100, Auto, Auto"
-                        ShowGridLines="True">
+            <lvc:CartesianChart
+                    Title="{Binding PlatformSubscriptionTitle}"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Height="300"
+                    Margin="0,0,0,5"
+                    BorderBrush="WhiteSmoke"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Series="{Binding PlatformSubscriptionSeries}" />
 
-                        <StackPanel
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Orientation="Vertical">
+            <lvc:CartesianChart
+                    Title="{Binding PlatformTitle}"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Height="300"
+                    Margin="0,0,0,5"
+                    BorderBrush="WhiteSmoke"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Series="{Binding PlatformSeries}"
+                    YAxes="{Binding PlatformYAxes}" />
 
-                                <ComboBox MaxDropDownHeight="100" SelectedIndex="0">
-                                        <ComboBoxItem>Top Streaming Platforms</ComboBoxItem>
-                                        <ComboBoxItem>Top Genres</ComboBoxItem>
-                                        <ComboBoxItem>Users By Country</ComboBoxItem>
-                                        <ComboBoxItem>Subscription Types</ComboBoxItem>
-                                </ComboBox>
-                        </StackPanel>
+            <Button
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Content="Delete"
+                    Background="Red"
+                    Foreground="White"
+                    HorizontalAlignment="Center"
+                    Command="{Binding DeletePlatformChart}" />
 
-                        <lvc:CartesianChart
-                                Title="{Binding PlatformTitle}"
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Height="300"
-                                Margin="0,0,0,5"
-                                BorderBrush="WhiteSmoke"
-                                BorderThickness="2"
-                                CornerRadius="10"
-                                Series="{Binding PlatformSeries}"
-                                YAxes="{Binding PlatformYAxes}" />
-                        
-                        <Button
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                Content="Delete"
-                                Background="Red"
-                                Foreground="White"
-                                HorizontalAlignment="Center"
-                                Command="{Binding DeletePlatformChart}" />
-                        
-                        <lvc:PieChart
-                                Title="{Binding TopGenreTitle}"
-                                Grid.Row="1"
-                                Grid.Column="2"
-                                Height="300"
-                                Margin="0,0,0,5"
-                                BorderBrush="WhiteSmoke"
-                                BorderThickness="2"
-                                CornerRadius="10"
-                                Series="{Binding GenreSeries}" />
+            <lvc:PieChart
+                    Title="{Binding TopGenreTitle}"
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Height="300"
+                    Margin="0,0,0,5"
+                    BorderBrush="WhiteSmoke"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Series="{Binding GenreSeries}" />
 
-                        <TextBlock
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                Text="Users By Country" 
-                                HorizontalAlignment="Center"
-                                FontSize="20"
-                                Foreground="RoyalBlue" />
+            <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Text="Users By Country" 
+                    HorizontalAlignment="Center"
+                    FontSize="20"
+                    Foreground="RoyalBlue" />
 
-                        <lvc:GeoMap
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                Height="300"
-                                Margin="0,50,0,5"
-                                BorderBrush="WhiteSmoke"
-                                BorderThickness="2"
-                                CornerRadius="10"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Stretch"
-                                MapProjection="Mercator"
-                                Series="{Binding CountrySeries}" />
+            <lvc:GeoMap
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Height="300"
+                    Margin="0,50,0,5"
+                    BorderBrush="WhiteSmoke"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"
+                    MapProjection="Mercator"
+                    Series="{Binding CountrySeries}" />
 
-                        <lvc:PieChart
-                                Title="{Binding SubscriptionTitle}"
-                                Grid.Row="3"
-                                Grid.Column="2"
-                                Height="300"
-                                Margin="0,0,0,5"
-                                BorderBrush="WhiteSmoke"
-                                BorderThickness="2"
-                                CornerRadius="10"
-                                Series="{Binding SubscriptionSeries}" />
+            <lvc:PieChart
+                    Title="{Binding SubscriptionTitle}"
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Height="300"
+                    Margin="0,0,0,5"
+                    BorderBrush="WhiteSmoke"
+                    BorderThickness="2"
+                    CornerRadius="10"
+                    Series="{Binding SubscriptionSeries}" />
 
-                </Grid>
-        </ScrollViewer>
+        </Grid>
+    </ScrollViewer>
 </Window>

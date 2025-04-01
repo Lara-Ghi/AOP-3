@@ -30,13 +30,122 @@ public partial class MainWindowViewModel : ViewModelBase
     public ObservableCollection<ISeries> GenreSeries { get; } = [];
     public HeatLandSeries[] CountrySeries { get; set; } = [];
     public ObservableCollection<ISeries> SubscriptionSeries { get; } = [];
+    public ISeries[] ListeningTimeSeries { get; set; } = [];
+    public Axis[] ListeningTimeXAxes { get; set; } = [];
+    public Axis[] ListeningTimeYAxes { get; set; } = [];
+
+    public ObservableCollection<ISeries> PlatformSubscriptionSeries { get; } = [];
 
     public MainWindowViewModel()
     {
+        ListeningTimeChart();
+        PlatformSubscriptionChart();
         TopPlatformChart();
         UsersByGenreChart();
         UsersByCountryChart();
         SubscriptionChart();
+    }
+
+    private void ListeningTimeChart()
+    {
+        var musicLoader = new DataLoader<GlobalMusicStreamingModel>();
+        musicLoader.LoadData("CSV-Files/GlobalMusicStreaming.csv");
+
+        var musicData = musicLoader.data;
+
+        var morningData = musicData.Where(m => m.ListeningTime == "Morning").ToList();
+        var afternoonData = musicData.Where(m => m.ListeningTime == "Afternoon").ToList();
+        var nightData = musicData.Where(m => m.ListeningTime == "Night").ToList();
+
+        var morningValues = morningData.Select(m => (double)m.MinutesStreamedPerDay).ToList();
+        var afternoonValues = afternoonData.Select(m => (double)m.MinutesStreamedPerDay).ToList();
+        var nightValues = nightData.Select(m => (double)m.MinutesStreamedPerDay).ToList();
+
+        var weeklyMorningValues = morningValues
+            .Select((value, index) => new { value, index })
+            .GroupBy(x => x.index / 7)
+            .Select(g => g.Sum(x => x.value))
+            .ToList();
+
+        var weeklyAfternoonValues = afternoonValues
+            .Select((value, index) => new { value, index })
+            .GroupBy(x => x.index / 7)
+            .Select(g => g.Sum(x => x.value))
+            .ToList();
+
+        var weeklyNightValues = nightValues
+            .Select((value, index) => new { value, index })
+            .GroupBy(x => x.index / 7)
+            .Select(g => g.Sum(x => x.value))
+            .ToList();
+
+        ListeningTimeSeries = new ISeries[]
+        {
+            new StackedAreaSeries<double>
+            {
+                Values = weeklyMorningValues,
+                Name = "Morning",
+                Fill = new SolidColorPaint(SKColors.LightBlue)
+            },
+            new StackedAreaSeries<double>
+            {
+                Values = weeklyAfternoonValues,
+                Name = "Afternoon",
+                Fill = new SolidColorPaint(SKColors.LightGreen)
+            },
+            new StackedAreaSeries<double>
+            {
+                Values = weeklyNightValues,
+                Name = "Night",
+                Fill = new SolidColorPaint(SKColors.LightCoral)
+            }
+        };
+
+        ListeningTimeXAxes = new Axis[]
+        {
+            new Axis
+            {
+                // Grouped into weeks
+                Labels = Enumerable.Range(1, weeklyMorningValues.Count).Select(i => $"Week {i}").ToList()
+            }
+        };
+
+        ListeningTimeYAxes = new Axis[]
+        {
+            new Axis
+            {
+                Name = "Minutes Streamed Per Week"
+            }
+        };
+    }
+
+    private void PlatformSubscriptionChart()
+    {
+        var musicLoader = new DataLoader<GlobalMusicStreamingModel>();
+        musicLoader.LoadData("CSV-Files/GlobalMusicStreaming.csv");
+
+        var musicData = musicLoader.data;
+
+        var groupedData = musicData
+            .GroupBy(m => new { m.StreamingPlatform, m.SubscriptionType })
+            .Select(g => new
+            {
+                Platform = g.Key.StreamingPlatform,
+                Subscription = g.Key.SubscriptionType,
+                Count = g.Count()
+            })
+            .ToList();
+
+        PlatformSubscriptionSeries.Clear();
+        foreach (var group in groupedData)
+        {
+            PlatformSubscriptionSeries.Add(new RowSeries<double>
+            {
+                Values = new List<double> { group.Count },
+                Name = $"{group.Platform} ({group.Subscription})",
+                Fill = new SolidColorPaint(new RandomColour().GetRandomColour())
+            });
+        }
     }
 
     private void TopPlatformChart()
@@ -57,6 +166,22 @@ public partial class MainWindowViewModel : ViewModelBase
             }
                 ];
     }
+
+    public LabelVisual ListeningTimeTitle { get; set; } = new LabelVisual
+    {
+        Text = "Listening Time (Morning, Afternoon, Night)",
+        TextSize = 20,
+        Padding = new LiveChartsCore.Drawing.Padding(15),
+        Paint = new SolidColorPaint(SKColors.RoyalBlue)
+    };
+
+    public LabelVisual PlatformSubscriptionTitle { get; set; } = new LabelVisual
+    {
+        Text = "Platform Subscription Types",
+        TextSize = 20,
+        Padding = new LiveChartsCore.Drawing.Padding(15),
+        Paint = new SolidColorPaint(SKColors.RoyalBlue)
+    };
 
     public LabelVisual PlatformTitle { get; set; } = new LabelVisual
     {
@@ -156,6 +281,6 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void DeletePlatformChart()
     {
-        
+
     }
 }
