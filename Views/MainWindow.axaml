@@ -61,7 +61,8 @@
                     Series="{Binding ListeningTimeSeries}"
                     XAxes="{Binding ListeningTimeXAxes}"
                     YAxes="{Binding ListeningTimeYAxes}"
-                    IsVisible="{Binding IsListeningTimeChartVisible}" />
+                    IsVisible="{Binding IsListeningTimeChartVisible}" 
+                    ZoomMode="X"/>
 
             <lvc:CartesianChart
                     Title="{Binding PlatformSubscriptionTitle}"
@@ -73,7 +74,8 @@
                     BorderThickness="2"
                     CornerRadius="10"
                     Series="{Binding PlatformSubscriptionSeries}"
-                    IsVisible="{Binding IsPlatformSubscriptionChartVisible}" />
+                    IsVisible="{Binding IsPlatformSubscriptionChartVisible}" 
+                    ZoomMode="Y"/>
 
             <lvc:CartesianChart
                     Title="{Binding PlatformTitle}"
@@ -86,7 +88,8 @@
                     CornerRadius="10"
                     Series="{Binding PlatformSeries}"
                     YAxes="{Binding PlatformYAxes}"
-                    IsVisible="{Binding IsPlatformChartVisible}" />
+                    IsVisible="{Binding IsPlatformChartVisible}" 
+                    ZoomMode="Y"/>
 
             <Button
                     Grid.Row="4"
