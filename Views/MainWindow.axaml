@@ -17,29 +17,84 @@
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
         <Grid
                 Margin="20"
-                ColumnDefinitions="Auto, 1*"
-                RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
-                ShowGridLines="True">
+                ColumnDefinitions="Auto, *"
+                RowDefinitions="Auto, *, *, *, *, *, *" >
 
             <StackPanel
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Orientation="Vertical">
-                <ToggleButton Content="Toggle Listening Time Chart" IsChecked="{Binding IsListeningTimeChartVisible}" />
-                <ToggleButton Content="Toggle Platform Subscription Chart" IsChecked="{Binding IsPlatformSubscriptionChartVisible}" />
-                <ToggleButton Content="Toggle Platform Chart" IsChecked="{Binding IsPlatformChartVisible}" />
-                <ToggleButton Content="Toggle Genre Chart" IsChecked="{Binding IsGenreChartVisible}" />
-                <ToggleButton Content="Toggle Country Chart" IsChecked="{Binding IsCountryChartVisible}" />
-                <ToggleButton Content="Toggle Subscription Chart" IsChecked="{Binding IsSubscriptionChartVisible}" />
-                <ComboBox MaxDropDownHeight="100" SelectedIndex="0">
-                    <ComboBoxItem>Top Streaming Platforms</ComboBoxItem>
-                    <ComboBoxItem>Top Genres</ComboBoxItem>
-                    <ComboBoxItem>Users By Country</ComboBoxItem>
-                    <ComboBoxItem>Subscription Types</ComboBoxItem>
-                </ComboBox>
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center" >
+
+                <TextBlock
+                        Text="Select a chart to view:"
+                        HorizontalAlignment="Center"
+                        FontSize="15"
+                        Foreground="RoyalBlue"
+                        FontWeight="Bold" />
+
             </StackPanel>
+
+                <ToggleButton
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Listening Time Chart"
+                        IsChecked="{Binding IsListeningTimeChartVisible}"
+                        FontWeight="Bold"
+                        Background="RoyalBlue" />
+
+                <ToggleButton
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Subscription by Platform Chart"
+                        IsChecked="{Binding IsPlatformSubscriptionChartVisible}"
+                        FontWeight="Bold"
+                        Background="RoyalBlue" />
+
+                <ToggleButton
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Top Platforms Chart"
+                        IsChecked="{Binding IsPlatformChartVisible}"
+                        FontWeight="Bold"
+                        Background="RoyalBlue" />
+
+                <ToggleButton
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Top Genre Chart"
+                        IsChecked="{Binding IsGenreChartVisible}"
+                        FontWeight="Bold"
+                        Background="RoyalBlue" />
+
+                <ToggleButton
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Users By Country Chart"
+                        IsChecked="{Binding IsCountryChartVisible}"
+                        FontWeight="Bold"
+                        Background="RoyalBlue" />
+
+                <ToggleButton
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="Subscription Chart"
+                        IsChecked="{Binding IsSubscriptionChartVisible}"
+                        FontWeight="Bold"
+                        Background="RoyalBlue" />
+
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
@@ -62,7 +117,9 @@
                     XAxes="{Binding ListeningTimeXAxes}"
                     YAxes="{Binding ListeningTimeYAxes}"
                     IsVisible="{Binding IsListeningTimeChartVisible}" 
-                    ZoomMode="X"/>
+                    ZoomMode="X"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
 
             <lvc:CartesianChart
                     Title="{Binding PlatformSubscriptionTitle}"
@@ -75,7 +132,8 @@
                     CornerRadius="10"
                     Series="{Binding PlatformSubscriptionSeries}"
                     IsVisible="{Binding IsPlatformSubscriptionChartVisible}" 
-                    ZoomMode="Y"/>
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
 
             <lvc:CartesianChart
                     Title="{Binding PlatformTitle}"
@@ -89,20 +147,13 @@
                     Series="{Binding PlatformSeries}"
                     YAxes="{Binding PlatformYAxes}"
                     IsVisible="{Binding IsPlatformChartVisible}" 
-                    ZoomMode="Y"/>
-
-            <Button
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Content="Delete"
-                    Background="Red"
-                    Foreground="White"
-                    HorizontalAlignment="Center"
-                    Command="{Binding DeletePlatformChart}" />
+                    ZoomMode="Y"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
 
             <lvc:PieChart
                     Title="{Binding TopGenreTitle}"
-                    Grid.Row="5"
+                    Grid.Row="4"
                     Grid.Column="1"
                     Height="300"
                     Margin="0,0,0,5"
@@ -110,10 +161,12 @@
                     BorderThickness="2"
                     CornerRadius="10"
                     Series="{Binding GenreSeries}"
-                    IsVisible="{Binding IsGenreChartVisible}" />
+                    IsVisible="{Binding IsGenreChartVisible}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
 
             <TextBlock
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Grid.Column="1"
                     Text="Users By Country" 
                     HorizontalAlignment="Center"
@@ -122,22 +175,22 @@
                     IsVisible="{Binding IsCountryChartVisible}" />
 
             <lvc:GeoMap
-                    Grid.Row="6"
+                    Grid.Row="5"
                     Grid.Column="1"
                     Height="300"
                     Margin="0,50,0,5"
                     BorderBrush="WhiteSmoke"
                     BorderThickness="2"
                     CornerRadius="10"
-                    VerticalAlignment="Bottom"
-                    HorizontalAlignment="Stretch"
                     MapProjection="Mercator"
                     Series="{Binding CountrySeries}"
-                    IsVisible="{Binding IsCountryChartVisible}" />
+                    IsVisible="{Binding IsCountryChartVisible}" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
 
             <lvc:PieChart
                     Title="{Binding SubscriptionTitle}"
-                    Grid.Row="8"
+                    Grid.Row="6"
                     Grid.Column="1"
                     Height="300"
                     Margin="0,0,0,5"
@@ -145,7 +198,9 @@
                     BorderThickness="2"
                     CornerRadius="10"
                     Series="{Binding SubscriptionSeries}"
-                    IsVisible="{Binding IsSubscriptionChartVisible}" />
+                    IsVisible="{Binding IsSubscriptionChartVisible}" 
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" />
 
         </Grid>
     </ScrollViewer>

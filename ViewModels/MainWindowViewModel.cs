@@ -293,12 +293,4 @@ public partial class MainWindowViewModel : ViewModelBase
         Padding = new LiveChartsCore.Drawing.Padding(15),
         Paint = new SolidColorPaint(SKColors.RoyalBlue),
     };
-
-    //TODO: implement the delete funtion for all of the charts
-
-    [RelayCommand]
-    private void DeletePlatformChart()
-    {
-
-    }
 }
