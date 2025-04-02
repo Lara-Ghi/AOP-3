@@ -43,7 +43,7 @@ public class UsersByCountryChart
         // Map country_counts to HeatLand objects using the shorthand codes
         var lands = country_counts.Select(c => new HeatLand
         {
-            Name = countryCodeMapping.ContainsKey(c.Country) ? countryCodeMapping[c.Country] : c.Country.ToLower(),
+            Name = countryCodeMapping.ContainsKey(c.Country!) ? countryCodeMapping[c.Country!] : c.Country!.ToLower(),
             Value = c.Count
         }).ToList();
 
