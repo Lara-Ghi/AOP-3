@@ -27,6 +27,12 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Orientation="Vertical">
+                <ToggleButton Content="Toggle Listening Time Chart" IsChecked="{Binding IsListeningTimeChartVisible}" />
+                <ToggleButton Content="Toggle Platform Subscription Chart" IsChecked="{Binding IsPlatformSubscriptionChartVisible}" />
+                <ToggleButton Content="Toggle Platform Chart" IsChecked="{Binding IsPlatformChartVisible}" />
+                <ToggleButton Content="Toggle Genre Chart" IsChecked="{Binding IsGenreChartVisible}" />
+                <ToggleButton Content="Toggle Country Chart" IsChecked="{Binding IsCountryChartVisible}" />
+                <ToggleButton Content="Toggle Subscription Chart" IsChecked="{Binding IsSubscriptionChartVisible}" />
                 <ComboBox MaxDropDownHeight="100" SelectedIndex="0">
                     <ComboBoxItem>Top Streaming Platforms</ComboBoxItem>
                     <ComboBoxItem>Top Genres</ComboBoxItem>
@@ -54,7 +60,8 @@
                     CornerRadius="10"
                     Series="{Binding ListeningTimeSeries}"
                     XAxes="{Binding ListeningTimeXAxes}"
-                    YAxes="{Binding ListeningTimeYAxes}" />
+                    YAxes="{Binding ListeningTimeYAxes}"
+                    IsVisible="{Binding IsListeningTimeChartVisible}" />
 
             <lvc:CartesianChart
                     Title="{Binding PlatformSubscriptionTitle}"
@@ -65,7 +72,8 @@
                     BorderBrush="WhiteSmoke"
                     BorderThickness="2"
                     CornerRadius="10"
-                    Series="{Binding PlatformSubscriptionSeries}" />
+                    Series="{Binding PlatformSubscriptionSeries}"
+                    IsVisible="{Binding IsPlatformSubscriptionChartVisible}" />
 
             <lvc:CartesianChart
                     Title="{Binding PlatformTitle}"
@@ -77,7 +85,8 @@
                     BorderThickness="2"
                     CornerRadius="10"
                     Series="{Binding PlatformSeries}"
-                    YAxes="{Binding PlatformYAxes}" />
+                    YAxes="{Binding PlatformYAxes}"
+                    IsVisible="{Binding IsPlatformChartVisible}" />
 
             <Button
                     Grid.Row="4"
@@ -97,7 +106,8 @@
                     BorderBrush="WhiteSmoke"
                     BorderThickness="2"
                     CornerRadius="10"
-                    Series="{Binding GenreSeries}" />
+                    Series="{Binding GenreSeries}"
+                    IsVisible="{Binding IsGenreChartVisible}" />
 
             <TextBlock
                     Grid.Row="6"
@@ -105,7 +115,8 @@
                     Text="Users By Country" 
                     HorizontalAlignment="Center"
                     FontSize="20"
-                    Foreground="RoyalBlue" />
+                    Foreground="RoyalBlue"
+                    IsVisible="{Binding IsCountryChartVisible}" />
 
             <lvc:GeoMap
                     Grid.Row="6"
@@ -118,7 +129,8 @@
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Stretch"
                     MapProjection="Mercator"
-                    Series="{Binding CountrySeries}" />
+                    Series="{Binding CountrySeries}"
+                    IsVisible="{Binding IsCountryChartVisible}" />
 
             <lvc:PieChart
                     Title="{Binding SubscriptionTitle}"
@@ -129,7 +141,8 @@
                     BorderBrush="WhiteSmoke"
                     BorderThickness="2"
                     CornerRadius="10"
-                    Series="{Binding SubscriptionSeries}" />
+                    Series="{Binding SubscriptionSeries}"
+                    IsVisible="{Binding IsSubscriptionChartVisible}" />
 
         </Grid>
     </ScrollViewer>

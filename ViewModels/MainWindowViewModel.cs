@@ -36,6 +36,24 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public ObservableCollection<ISeries> PlatformSubscriptionSeries { get; } = [];
 
+    [ObservableProperty]
+    public bool isListeningTimeChartVisible = false;
+
+    [ObservableProperty]
+    public bool isPlatformSubscriptionChartVisible = false;
+
+    [ObservableProperty]
+    public bool isPlatformChartVisible = false;
+
+    [ObservableProperty]
+    public bool isGenreChartVisible = false;
+
+    [ObservableProperty]
+    public bool isCountryChartVisible = false;
+
+    [ObservableProperty]
+    public bool isSubscriptionChartVisible = false;
+
     public MainWindowViewModel()
     {
         ListeningTimeChart();
