@@ -14,15 +14,10 @@
         Icon="/Assets/avalonia-logo.ico"
         mc:Ignorable="d">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,0">
-        <Grid
-                Margin="20"
-                ColumnDefinitions="Auto, *"
-                RowDefinitions="Auto, *, *, *, *, *, *" >
-
+        <Canvas>
             <StackPanel
-                Grid.Row="0"
-                Grid.Column="0"
+                Canvas.Left="10"
+                Canvas.Top="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" >
 
@@ -36,8 +31,8 @@
             </StackPanel>
 
                 <ToggleButton
-                        Grid.Row="1"
-                        Grid.Column="0"
+                        Canvas.Left="10"
+                        Canvas.Top="100"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Content="Listening Time Chart"
@@ -46,8 +41,8 @@
                         Background="RoyalBlue" />
 
                 <ToggleButton
-                        Grid.Row="2"
-                        Grid.Column="0"
+                        Canvas.Left="10"
+                        Canvas.Top="150"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Content="Subscription by Platform Chart"
@@ -56,8 +51,8 @@
                         Background="RoyalBlue" />
 
                 <ToggleButton
-                        Grid.Row="3"
-                        Grid.Column="0"
+                        Canvas.Left="10"
+                        Canvas.Top="200"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Content="Top Platforms Chart"
@@ -66,8 +61,8 @@
                         Background="RoyalBlue" />
 
                 <ToggleButton
-                        Grid.Row="4"
-                        Grid.Column="0"
+                        Canvas.Left="10"
+                        Canvas.Top="250"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Content="Top Genre Chart"
@@ -76,8 +71,8 @@
                         Background="RoyalBlue" />
 
                 <ToggleButton
-                        Grid.Row="5"
-                        Grid.Column="0"
+                        Canvas.Left="10"
+                        Canvas.Top="300"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Content="Users By Country Chart"
@@ -86,8 +81,8 @@
                         Background="RoyalBlue" />
 
                 <ToggleButton
-                        Grid.Row="6"
-                        Grid.Column="0"
+                        Canvas.Left="10"
+                        Canvas.Top="350"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Content="Subscription Chart"
@@ -95,113 +90,171 @@
                         FontWeight="Bold"
                         Background="RoyalBlue" />
 
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="1"
-                Text="Dashboard"
-                HorizontalAlignment="Center"
-                FontSize="35"
-                Foreground="RoyalBlue"
-                FontWeight="Bold" />
+                <TextBlock
+                        Canvas.Left="700"
+                        Canvas.Top="10"
+                        Text="Dashboard"
+                        HorizontalAlignment="Center"
+                        FontSize="35"
+                        Foreground="RoyalBlue"
+                        FontWeight="Bold" />
 
-            <lvc:CartesianChart
-                    Title="{Binding ListeningTimeTitle}"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    Height="300"
-                    Margin="0,0,0,5"
-                    BorderBrush="WhiteSmoke"
-                    BorderThickness="2"
-                    CornerRadius="10"
-                    Series="{Binding ListeningTimeSeries}"
-                    XAxes="{Binding ListeningTimeXAxes}"
-                    YAxes="{Binding ListeningTimeYAxes}"
-                    IsVisible="{Binding IsListeningTimeChartVisible}" 
-                    ZoomMode="X"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"/>
+                <Border
+                        x:Name="ListeningTimeChart"
+                        Width="400"
+                        Height="200"
+                        Canvas.Left="300"
+                        Canvas.Top="100"
+                        Background="Transparent"
+                        PointerPressed="OnGraphPointerPressed"
+                        PointerMoved="OnGraphPointerMoved"
+                        PointerReleased="OnGraphPointerReleased">
 
-            <lvc:CartesianChart
-                    Title="{Binding PlatformSubscriptionTitle}"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Height="300"
-                    Margin="0,0,0,5"
-                    BorderBrush="WhiteSmoke"
-                    BorderThickness="2"
-                    CornerRadius="10"
-                    Series="{Binding PlatformSubscriptionSeries}"
-                    IsVisible="{Binding IsPlatformSubscriptionChartVisible}" 
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"/>
+                        <lvc:CartesianChart
+                                Title="{Binding ListeningTimeTitle}"
+                                Height="300"
+                                Margin="0,0,0,5"
+                                BorderBrush="WhiteSmoke"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                Series="{Binding ListeningTimeSeries}"
+                                XAxes="{Binding ListeningTimeXAxes}"
+                                YAxes="{Binding ListeningTimeYAxes}"
+                                IsVisible="{Binding IsListeningTimeChartVisible}" 
+                                ZoomMode="X"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                </Border>
 
-            <lvc:CartesianChart
-                    Title="{Binding PlatformTitle}"
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    Height="300"
-                    Margin="0,0,0,5"
-                    BorderBrush="WhiteSmoke"
-                    BorderThickness="2"
-                    CornerRadius="10"
-                    Series="{Binding PlatformSeries}"
-                    YAxes="{Binding PlatformYAxes}"
-                    IsVisible="{Binding IsPlatformChartVisible}" 
-                    ZoomMode="Y"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"/>
+                <Border
+                        x:Name="PlatformSubscriptionChart"
+                        Width="400"
+                        Height="200"
+                        Canvas.Left="700"
+                        Canvas.Top="100"
+                        Background="Transparent"
+                        PointerPressed="OnGraphPointerPressed"
+                        PointerMoved="OnGraphPointerMoved"
+                        PointerReleased="OnGraphPointerReleased">
 
-            <lvc:PieChart
-                    Title="{Binding TopGenreTitle}"
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Height="300"
-                    Margin="0,0,0,5"
-                    BorderBrush="WhiteSmoke"
-                    BorderThickness="2"
-                    CornerRadius="10"
-                    Series="{Binding GenreSeries}"
-                    IsVisible="{Binding IsGenreChartVisible}"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" />
+                        <lvc:CartesianChart
+                                Title="{Binding PlatformSubscriptionTitle}"
+                                Height="300"
+                                Margin="0,0,0,5"
+                                BorderBrush="WhiteSmoke"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                Series="{Binding PlatformSubscriptionSeries}"
+                                IsVisible="{Binding IsPlatformSubscriptionChartVisible}" 
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                </Border>
 
-            <TextBlock
-                    Grid.Row="5"
-                    Grid.Column="1"
+                <Border
+                        x:Name="PlatformChart"
+                        Width="400"
+                        Height="200"
+                        Canvas.Left="1100"
+                        Canvas.Top="100"
+                        Background="Transparent"
+                        PointerPressed="OnGraphPointerPressed"
+                        PointerMoved="OnGraphPointerMoved"
+                        PointerReleased="OnGraphPointerReleased">
+
+                        <lvc:CartesianChart
+                                Title="{Binding PlatformTitle}"
+                                Height="300"
+                                Margin="0,0,0,5"
+                                BorderBrush="WhiteSmoke"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                Series="{Binding PlatformSeries}"
+                                YAxes="{Binding PlatformYAxes}"
+                                IsVisible="{Binding IsPlatformChartVisible}" 
+                                ZoomMode="Y"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"/>
+                </Border>
+
+                <Border
+                        x:Name="TopGenreChart"
+                        Width="400"
+                        Height="200"
+                        Canvas.Left="300"
+                        Canvas.Top="400"
+                        Background="Transparent"
+                        PointerPressed="OnGraphPointerPressed"
+                        PointerMoved="OnGraphPointerMoved"
+                        PointerReleased="OnGraphPointerReleased">
+
+                        <lvc:PieChart
+                                Title="{Binding TopGenreTitle}"
+                                Height="300"
+                                Margin="0,0,0,5"
+                                BorderBrush="WhiteSmoke"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                Series="{Binding GenreSeries}"
+                                IsVisible="{Binding IsGenreChartVisible}"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                </Border>
+
+                <TextBlock
                     Text="Users By Country" 
                     HorizontalAlignment="Center"
                     FontSize="20"
                     Foreground="RoyalBlue"
+                    Canvas.Left="800"
+                    Canvas.Top="350"
                     IsVisible="{Binding IsCountryChartVisible}" />
+                
+                <Border
+                        x:Name="TopCountryChart"
+                        Width="400"
+                        Height="200"
+                        Canvas.Left="700"
+                        Canvas.Top="400"
+                        Background="Transparent"
+                        PointerPressed="OnGraphPointerPressed"
+                        PointerMoved="OnGraphPointerMoved"
+                        PointerReleased="OnGraphPointerReleased">
 
-            <lvc:GeoMap
-                    Grid.Row="5"
-                    Grid.Column="1"
-                    Height="300"
-                    Margin="0,50,0,5"
-                    BorderBrush="WhiteSmoke"
-                    BorderThickness="2"
-                    CornerRadius="10"
-                    MapProjection="Mercator"
-                    Series="{Binding CountrySeries}"
-                    IsVisible="{Binding IsCountryChartVisible}" 
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" />
+                        <lvc:GeoMap
+                                Height="300"
+                                Margin="0,50,0,5"
+                                BorderBrush="WhiteSmoke"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                MapProjection="Mercator"
+                                Series="{Binding CountrySeries}"
+                                IsVisible="{Binding IsCountryChartVisible}" 
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                </Border>
 
-            <lvc:PieChart
-                    Title="{Binding SubscriptionTitle}"
-                    Grid.Row="6"
-                    Grid.Column="1"
-                    Height="300"
-                    Margin="0,0,0,5"
-                    BorderBrush="WhiteSmoke"
-                    BorderThickness="2"
-                    CornerRadius="10"
-                    Series="{Binding SubscriptionSeries}"
-                    IsVisible="{Binding IsSubscriptionChartVisible}" 
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" />
+                <Border
+                        x:Name="SubscriptionTypeChart"
+                        Width="400"
+                        Height="200"
+                        Canvas.Left="1100"
+                        Canvas.Top="400"
+                        Background="Transparent"
+                        PointerPressed="OnGraphPointerPressed"
+                        PointerMoved="OnGraphPointerMoved"
+                        PointerReleased="OnGraphPointerReleased">
 
-        </Grid>
-    </ScrollViewer>
+                        <lvc:PieChart
+                                Title="{Binding SubscriptionTitle}"
+                                Height="300"
+                                Margin="0,0,0,5"
+                                BorderBrush="WhiteSmoke"
+                                BorderThickness="2"
+                                CornerRadius="10"
+                                Series="{Binding SubscriptionSeries}"
+                                IsVisible="{Binding IsSubscriptionChartVisible}" 
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                </Border>
+        </Canvas>
 </Window>

@@ -132,7 +132,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             new Axis
             {
-                Name = "Minutes Streamed Per Week"
+                Name = "Minutes"
             }
         };
     }
